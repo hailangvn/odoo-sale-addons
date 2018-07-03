@@ -7,6 +7,7 @@ POINT_OPERATIONS = [
     ("replace", "Replace"),
     ("increase", "Increase"),
     ("decrease", "Decrease"),
+    ("return", "Return"),
 ]
 
 
