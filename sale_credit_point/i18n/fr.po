@@ -121,12 +121,6 @@ msgid "Increase"
 msgstr "Augmenter"
 
 #. module: sale_credit_point
-#: selection:credit.point.history,operation:0
-#: selection:wiz.manage.credit.point,operation:0
-msgid "Return"
-msgstr "Revenir"
-
-#. module: sale_credit_point
 #: model:ir.model.fields,field_description:sale_credit_point.field_credit_point_history___last_update
 #: model:ir.model.fields,field_description:sale_credit_point.field_wiz_manage_credit_point___last_update
 msgid "Last Modified on"
