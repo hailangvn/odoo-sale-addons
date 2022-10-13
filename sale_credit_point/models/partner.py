@@ -1,7 +1,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models, api, exceptions, _
+from odoo import _, api, exceptions, fields, models
 
 POINT_OPERATIONS = [
     ("replace", "Replace"),
@@ -50,7 +50,6 @@ class ResPartner(models.Model):
             raise exceptions.ValidationError(_(
                 "You can't set a credit point lower than 0"))
 
-    @api.multi
     def action_update_credit_point(self):
         """Open update credit point wizard."""
         self.ensure_one()
@@ -66,9 +65,10 @@ class ResPartner(models.Model):
     def _credit_point_update(self, amount, comment=''):
         self.credit_point = amount
         if comment:
-            self.message_post(body=(_(
-                'Credit updated to %s. Reason: %s'
-            ) % (self.credit_point, comment)))
+            self.message_post(
+                body=_('Credit updated to %s. Reason: %s')
+                    % (self.credit_point, comment),
+            )
 
     def credit_point_replace(self, amount, comment=''):
         self._credit_point_update(amount, comment=comment)

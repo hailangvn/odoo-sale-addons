@@ -7,6 +7,7 @@ from .partner import POINT_OPERATIONS
 
 class PointHistory(models.Model):
     _name = "credit.point.history"
+    _description = "CreditPointHistory"
     _rec_name = "partner_id"
 
     partner_id = fields.Many2one(

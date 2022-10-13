@@ -1,7 +1,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, _
+from odoo import _, models
 from odoo.exceptions import UserError
 from odoo import tools
 
@@ -17,7 +17,7 @@ class SaleOrder(models.Model):
         if not user:
             user = self.env.user
         self.ensure_one()
-        if not self.partner_id.sudo(user.id).credit_point_bypass_check():
+        if not self.partner_id.with_user(user.id).credit_point_bypass_check():
             if self.amount_total > self.partner_id.credit_point:
                 raise UserError(self.credit_point_check_failed_msg)
 
@@ -32,7 +32,6 @@ class SaleOrder(models.Model):
     def credit_point_decrease_msg(self):
         return _('SO %s') % self.name
 
-    @api.multi
     def action_confirm(self):
         """Check credit before confirmation, update credit if check passed."""
         install_module = tools.config.get('init')
@@ -47,7 +46,6 @@ class SaleOrder(models.Model):
                     sale.amount_total, comment=self.credit_point_decrease_msg)
         return super().action_confirm()
 
-    @api.multi
     def action_cancel(self):
         for sale in self:
             if sale.state == 'sale':

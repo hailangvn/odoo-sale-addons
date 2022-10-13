@@ -46,7 +46,7 @@ class TestHistory(TransactionCase):
             vals.update({
                 'partner_ids': [(6, 0, self.partner.ids)]
             })
-            wiz = self.wiz_model.new(vals)
+            wiz = self.wiz_model.create(vals)
             wiz.action_update_credit()
 
     def test_history_creation(self):
